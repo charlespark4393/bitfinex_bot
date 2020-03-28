@@ -1,0 +1,35 @@
+Bitfinex margin market maker bot 
+
+Please use java or python script
+
+
+Algorithm
+
+	•	Set trading pair    ex) btc/usd
+	•	Set trade amount  ex) 0.1 btc  per trade
+	•	Set loop delay  ex) 5 seconds
+	•	Set round price value up to X decimal points  ex> X= 8  then price = 1001.00000000 usd/btc
+	•	Set spread_1  ex) 0.1% or 0.001
+	•	Set spread_2  ex) 0.5% or 0.005
+	•	Set Repeat_order01(Y)   ex) Y = 3 > repeat order01  * 3 times
+	•	Set Repeat_order02 (Z)  ex) Z = 1 > repeat order02 * 1 times
+ 
+
+
+<PLACE ORDERS>
+	•	Grab current_ticker_price  ex) 1000 usd/btc
+	•	Place margin_sell_order01 at  current_ticker_price * (1+ spread_1)  ex) sell 0.1 btc at 1001 usd/btc  
+	•	Place margin_buy_order01 at  current_ticker_price x * (1 - spread_1)  ex) buy 0.1 btc at 999 usd/btc
+	•	Repeat_order01 Y  times
+	•	Place margin_sell_order02 at  current_ticker_price * (1 + spread_2)  ex) sell 0.1 btc at 1005 usd/btc
+	•	Place margin_buy_order02 at  current_ticker_price * (1 - spread_2)  ex) buy 0.1 btc at 995 usd/btc
+	•	Repeat_order02  Z  times
+
+<CANCEL EXISITING ORDER>
+	•	Grab existing order queue 
+	•	Sort existing orders by price
+	•	Cancel order  highest_price_exisitng_order
+	•	Cancel order  lowest_price_exisitng_order
+	•	Sort existing orders by amount 
+	•	Cancel order  highest_amount_exisitng_order
+	•	Cancel order  lowest_amount_exisitng_order
